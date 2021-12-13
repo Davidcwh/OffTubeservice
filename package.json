@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "bull": "^4.1.1",
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.15",
+    "socket.io": "^4.4.0",
     "ytdl-core": "^4.9.1"
   }
 }
