@@ -1,6 +1,19 @@
+import { SocketInit } from "./utils/Socket.io";
+import http from 'http'; 
+import { Server, Socket } from "socket.io";
 const express = require('express');
+const routes = require('./routes')
 
 const app = express();
+const server = http.createServer(app);
+export const io = new Server(server, {
+  cors: {
+    origin: "*"
+  }
+});
+
+new SocketInit(io);
+
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -22,6 +35,6 @@ app.use(function(req, res, next) {
   }
 });
 
-require('./routes')(app);
+routes(app);
 
-module.exports = app;
+module.exports = server;
