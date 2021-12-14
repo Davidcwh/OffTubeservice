@@ -4,11 +4,13 @@ import express, { Request, Response } from "express";
 
 const postDownload = async (req: Request, res: Response) => {
     const { youtubeUrl } = req.body;
+    console.log(youtubeUrl)
 
     // check if youtubeUrl is valid
     if(!VideoUtil.isValidUrl(youtubeUrl)) {
         return res.status(500).json('Invalid youtube Url given');
     }
+    console.log("url is valid")
 
     await downloadQueue.add({ youtubeUrl });
     res.status(200).send("Downloading");
