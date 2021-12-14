@@ -10,7 +10,7 @@ const postDownload = async (req: Request, res: Response) => {
         return res.status(500).json('Invalid youtube Url given');
     }
 
-    const { title } = await downloadQueue.add({ youtubeUrl });
+    await downloadQueue.add({ youtubeUrl });
     res.status(200).send("Downloading");
     
 };

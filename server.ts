@@ -1,9 +1,11 @@
 import { SocketInit } from "./utils/Socket.io";
 import http from 'http'; 
 import { Server, Socket } from "socket.io";
-const express = require('express');
-const routes = require('./routes')
+import express, { Request, Response, NextFunction } from "express";
+import { config } from "dotenv";
+config()
 
+const routes = require('./routes')
 const app = express();
 const server = http.createServer(app);
 export const io = new Server(server, {
@@ -21,7 +23,7 @@ app.use(
   })
 );
 
-app.use(function(req, res, next) {
+app.use(function(req: Request, res: Response, next: NextFunction) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
   res.header(

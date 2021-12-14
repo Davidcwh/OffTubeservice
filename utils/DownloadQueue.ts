@@ -5,8 +5,8 @@ import { VideoUtil } from "./VideoUtil";
 
 const downloadQueue = new Bull("download queue", {
     redis: {
-        host: process.env.REDIS_HOST,
-        port: parseInt(process.env.REDIS_PORT)
+        host: process.env.REDIS_HOST!,
+        port: parseInt(process.env.REDIS_PORT!)
     }
 });
 
@@ -29,7 +29,7 @@ downloadQueue.process((job, done) => {
                         socket.publishEvent(Events.VIDEO_STARTED, title);
                         console.log("Download started")
                     })
-                    .on("error", (error) => {
+                    .on("error", (error: Error) => {
                         socket.publishEvent(Events.VIDEO_ERROR, error);
                         console.log("Download error")
 
